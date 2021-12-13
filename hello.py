@@ -4,6 +4,7 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os
 
 # create a Flask instance
 app = Flask(__name__)
@@ -13,6 +14,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SECRET_KEY'] = 'my secret key nobody needs to know'
 # initialize the db
 db = SQLAlchemy(app)
+
+
 
 # Create Model
 class Users(db.Model):
@@ -36,6 +39,9 @@ class NamerForm(FlaskForm):
     name = StringField('Whats your name', validators=[DataRequired()])
     submit =  SubmitField('Submit')
 
+
+# safe,capitalize,lower,upper,title,trim,striptags
+
 @app.route('/user/add',methods=['GET','POST'])
 def add_user():
     name = None
@@ -53,6 +59,8 @@ def add_user():
     our_users = Users.query.order_by(Users.date_added)
     return render_template('add_user.html',form=form,name=name,our_users=our_users)
 
+
+# create a route decorator
 @app.route('/')
 def index():
     first_name= 'Chunks'
@@ -61,13 +69,17 @@ def index():
    
     
     return render_template('index.html', 
-   
+    first_name=first_name,
+    stuff=stuff,
+    
     )
 
+# localhost:5000/user/Chunks
 @app.route('/user/<name>')
 
 def user(name):
     return render_template('user.html',user_name=name)
+
 
 
 # Create Name page
