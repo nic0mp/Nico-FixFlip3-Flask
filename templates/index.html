@@ -2,9 +2,17 @@
 
 {% block content %}
 
-<h1>Hello!</h1>
-
-<p>This is my site!!</p>
+<form action='/' method='POST'>
+    Home 
+    <input type='text' name='weight'><br>
+    Height
+    <input type='text' name='height'>
+    <button type='submit' value='submit'>calculate</buttton>
+    <form>
+    {% if bmi %}
+    {{bmi}}
+    {% endif %}
+</form>
 
 
   
