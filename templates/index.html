@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Hello!</h1>
+
+<p>This is my site!!</p>
+
+<p>So cool, I am {{first_name}}</p>
+
+<p> {{stuff | safe }} </p>
+
+<p> {{stuff | striptags }} </p>
+
+<p> {{stuff | title }} </p>
+
+<h3>Favorite Pizza:</h3>
+  
+{% for type in fave_pizza %}
+    {{type  }} <br/>
+{%endfor%} <br/>
+
+<!-- {{fave_pizza.1}} -->
+
+{% for type in fave_pizza %}
+    
+    {% if type == 33 %}
+        {{ type + 100 }}<br/>
+    {% else %}
+        {{ type }}<br/>
+    {% endif %}
+        
+{%endfor%} <br/>
+
+{% endblock %}
