@@ -6,8 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
 
-
-
 # create a Flask instance
 app = Flask(__name__)
 #  add db
@@ -16,8 +14,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SECRET_KEY'] = 'my secret key nobody needs to know'
 # initialize the db
 db = SQLAlchemy(app)
-
-
 
 # Create Model
 class Users(db.Model):
@@ -61,28 +57,17 @@ def add_user():
     our_users = Users.query.order_by(Users.date_added)
     return render_template('add_user.html',form=form,name=name,our_users=our_users)
 
-
 # create a route decorator
 @app.route('/')
 def index():
     first_name= 'Chunks'
     # stuff = 'This is <strong>Bold</strong> Text' ** wotks with safe and striptag
     stuff = 'This is Bold Text'
-   
-    
+
     return render_template('index.html', 
     first_name=first_name,
     stuff=stuff,
-    
     )
-
-# localhost:5000/user/Chunks
-@app.route('/user/<name>')
-
-def user(name):
-    return render_template('user.html',user_name=name)
-
-
 
 # Create Name page
 @app.route('/name', methods=['GET','POST'])
@@ -100,10 +85,25 @@ def name():
     )
 
 @app.route('/', methods=['POST','GET'])
-def calculate():
-    bmi = ' '
-    if request.method== 'POST' and 'weight' in request.form and 'height' in request.form:
-        Weight=float(request.form.get('weight'))
-        Height=float(request.form.get('height'))
-        bmi=round(Weight/((Height/100)**2),2)
-    return render_template('index.html',bmi=bmi)
+def calculateCost():
+    totalCost = ''
+    ltcAmount = ''
+    loanDownPayment=''
+    gProfit=''
+    roi=''
+    if request.method== 'POST' and 'arv' in request.form and 'hprice' in request.form and 'rbudget' in request.form :
+        AfterRepairVal=int(request.form.get('arv'))
+        HPrice=int(request.form.get('hprice'))
+        RBudget=int(request.form.get('rbudget'))
+        totalCost=int(HPrice + RBudget)
+        ltcAmount=int(.7*totalCost)
+        loanDownPayment=int(totalCost*.3)
+        gProfit=int(AfterRepairVal-totalCost)
+        roi = int((gProfit/totalCost)*100)
+    return render_template('index.html',
+                totalCost=totalCost, 
+                ltcAmount=ltcAmount,
+                loanDownPayment=loanDownPayment,
+                gProfit=gProfit,
+                roi=roi
+                )

@@ -3,15 +3,41 @@
 {% block content %}
 
 <form action='/' method='POST'>
-    Home 
-    <input type='text' name='weight'><br>
-    Height
-    <input type='text' name='height'>
-    <button type='submit' value='submit'>calculate</buttton>
-    <form>
-    {% if bmi %}
-    {{bmi}}
-    {% endif %}
+    
+    House Price
+    <input type='text' name='hprice'><br>
+    Repair Budget
+    <input type='text' name='rbudget'><br/>
+    After Repair Value
+    <input type='text' name='arv'><br>
+   
+    <button type='submit' value='submit'>CALCULATE</buttton>
+    </button>
+    <div>
+        {% if totalCost %}
+        <p>Total cost of project: ${{totalCost}}</p>
+        {% endif %}
+    </div>
+    <div>
+        {% if ltcAmount %}
+        <p> Funding Amount at 70%: ${{ltcAmount}}</p>
+        {% endif %}
+    </div>
+    <div>
+        {% if loanDownPayment %}
+        <p> Down Payment at 30%: ${{loanDownPayment}}</p>
+        {% endif %}
+    </div>
+    <div>
+        {% if gProfit %}
+        <p>Gross Profit: ${{ gProfit }}</p>
+        {% endif %}
+    </div>
+    <div>
+        {% if roi %}
+        {{ roi }}
+        {% endif %}
+    </div>
 </form>
 
 
