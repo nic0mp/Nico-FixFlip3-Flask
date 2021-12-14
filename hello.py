@@ -91,6 +91,7 @@ def calculateCost():
     loanDownPayment=''
     gProfit=''
     roi=''
+    RefiAmt = ''
     if request.method== 'POST' and 'arv' in request.form and 'hprice' in request.form and 'rbudget' in request.form :
         AfterRepairVal=int(request.form.get('arv'))
         HPrice=int(request.form.get('hprice'))
@@ -99,11 +100,13 @@ def calculateCost():
         ltcAmount=int(.7*totalCost)
         loanDownPayment=int(totalCost*.3)
         gProfit=int(AfterRepairVal-totalCost)
-        roi = int((gProfit/totalCost)*100)
+        roi = round(float((gProfit/totalCost)*100),2)
+        RefiAmt = int(AfterRepairVal*.7)
     return render_template('index.html',
                 totalCost=totalCost, 
                 ltcAmount=ltcAmount,
                 loanDownPayment=loanDownPayment,
                 gProfit=gProfit,
-                roi=roi
+                roi=roi,
+                RefiAmt=RefiAmt
                 )

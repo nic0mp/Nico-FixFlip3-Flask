@@ -35,7 +35,12 @@
     </div>
     <div>
         {% if roi %}
-        {{ roi }}
+        <p>Potential Gross ROI {{ roi }}%</p>
+        {% endif %}
+    </div>
+    <div>
+        {% if RefiAmt %}
+        <p>Potential Cash-out Refinance amount of ${{ RefiAmt }}</p>
         {% endif %}
     </div>
 </form>
