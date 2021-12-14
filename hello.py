@@ -92,21 +92,33 @@ def calculateCost():
     gProfit=''
     roi=''
     RefiAmt = ''
-    if request.method== 'POST' and 'arv' in request.form and 'hprice' in request.form and 'rbudget' in request.form :
+    CashFlow=''
+    AnnualInc=''
+    cROI=''
+    if request.method== 'POST' and 'arv' in request.form and 'hprice' in request.form and 'rbudget' in request.form and 'totalRentInc' in request.form and 'totalExpenses' in request.form:
         AfterRepairVal=int(request.form.get('arv'))
         HPrice=int(request.form.get('hprice'))
         RBudget=int(request.form.get('rbudget'))
+        RentalIncome=int(request.form.get('totalRentInc'))
+        RentalExpenses=int(request.form.get('totalExpenses'))
         totalCost=int(HPrice + RBudget)
         ltcAmount=int(.7*totalCost)
         loanDownPayment=int(totalCost*.3)
         gProfit=int(AfterRepairVal-totalCost)
         roi = round(float((gProfit/totalCost)*100),2)
         RefiAmt = int(AfterRepairVal*.7)
+        CashFlow=int(RentalIncome-RentalExpenses)
+        AnnualInc=int(CashFlow*12)
+        cROI=round(float((AnnualInc/totalCost)*100),2)
     return render_template('index.html',
                 totalCost=totalCost, 
                 ltcAmount=ltcAmount,
                 loanDownPayment=loanDownPayment,
                 gProfit=gProfit,
                 roi=roi,
-                RefiAmt=RefiAmt
+                RefiAmt=RefiAmt,
+                CashFlow=CashFlow,
+                AnnualInc=AnnualInc,
+                cROI=cROI
                 )
+

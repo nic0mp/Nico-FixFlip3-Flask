@@ -10,9 +10,14 @@
     <input type='text' name='rbudget'><br/>
     After Repair Value
     <input type='text' name='arv'><br>
+    Rental Income
+    <input type='text' name='totalRentInc'><br>
+    Total Expenses
+    <input type='text' name='totalExpenses'><br/>
    
-    <button type='submit' value='submit'>CALCULATE</buttton>
+    <button type='submit' value='submit'>CALCULATE
     </button>
+    
     <div>
         {% if totalCost %}
         <p>Total cost of project: ${{totalCost}}</p>
@@ -41,6 +46,22 @@
     <div>
         {% if RefiAmt %}
         <p>Potential Cash-out Refinance amount of ${{ RefiAmt }}</p>
+        {% endif %}
+    </div>
+<!-- RENTAL SECTION -->
+    <div>
+        {% if CashFlow %}
+        <p>Potential Cash Flow ${{ CashFlow }}</p>
+        {% endif %}
+    </div>
+    <div>
+        {% if AnnualInc %}
+        <p>Annual Income ${{ AnnualInc }}</p>
+        {% endif %}
+    </div>
+    <div>
+        {% if cROI %}
+        <p>Cash on Cash ROI {{ cROI }}%</p>
         {% endif %}
     </div>
 </form>
