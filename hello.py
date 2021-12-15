@@ -152,6 +152,7 @@ def calculateCost():
         AnnualInc=int(CashFlow*12)
         cROI=round(float((AnnualInc/totalCost)*100),2)
     return render_template('index.html',
+                AfterRepairVal=AfterRepairVal,
                 totalCost=totalCost, 
                 ltcAmount=ltcAmount,
                 loanDownPayment=loanDownPayment,

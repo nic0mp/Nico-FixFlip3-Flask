@@ -1,0 +1,26 @@
+body {
+    background-color: #f7f7f7;
+    color: #575655;
+  }
+
+ h1{
+     text-align: center;
+     color: #575655;
+ }
+  
+.ffheader{
+    margin: auto;
+    margin-bottom: 5%;
+    width: 75%;
+}
+  
+.calc-box{
+    margin: auto;
+    margin-top: 2%;
+    width: 80%;
+    /* height: 500px; */
+}
+ 
+.inp-box{
+    margin-bottom: 10px;
+}
