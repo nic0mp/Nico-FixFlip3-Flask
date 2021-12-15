@@ -36,6 +36,7 @@
             {{form.email(class="form-control",value=name_to_update.email)}}
             <br/>
             {{form.submit(class="btn btn-secondary")}}
+            <a href="{{ url_for('delete', id=id) }}">DELETE</a>
         </form>
     </div>
 <br/><br/>

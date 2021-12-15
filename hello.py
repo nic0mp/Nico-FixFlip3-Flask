@@ -26,6 +26,23 @@ class Users(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.name
 
+@app.route('/update/<int:id>')
+def delete(id):
+    user_to_delete = Users.query.get_or_404(id) 
+    name = None
+    form=UserForm()
+
+    try:
+        db.session.delete(user_to_delete)
+        db.session.commit()
+        flash('User Deleted')
+        our_users = Users.query.order_by(Users.date_added)
+        return render_template('add_user.html',form=form,name=name,our_users=our_users)
+
+    except:
+        flash('Whoops, try again')
+        return render_template('add_user.html',form=form,name=name,our_users=our_users)
+
 # Create form class
 class UserForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
@@ -50,13 +67,12 @@ def update(id):
         except:
             flash('Error, you messed up')
             return render_template('update.html',
-                    form=form,
-                    name_to_update=name_to_update) 
-                       
+                    form=form,name_to_update=name_to_update) 
+       
     else:
         return render_template('update.html',
-                    form=form,
-                    name_to_update=name_to_update) 
+                    form=form,name_to_update=name_to_update,id=id) 
+                    
 # Create form class
 class NamerForm(FlaskForm):
     name = StringField('Whats your name', validators=[DataRequired()])
