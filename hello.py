@@ -32,6 +32,31 @@ class UserForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     submit =  SubmitField('Submit')
 
+# Update DB record
+@app.route('/update/<int:id>', methods=['GET','POST']) 
+def update(id):
+    form = UserForm()
+    name_to_update = Users.query.get_or_404(id)
+    if request.method == 'POST':
+        name_to_update.name = request.form['name']
+        name_to_update.email = request.form['email']
+        try:
+            db.session.commit()
+            flash('User has been Updated')
+            return render_template('update.html',
+                    form=form,
+                    name_to_update=name_to_update)
+                    
+        except:
+            flash('Error, you messed up')
+            return render_template('update.html',
+                    form=form,
+                    name_to_update=name_to_update) 
+                       
+    else:
+        return render_template('update.html',
+                    form=form,
+                    name_to_update=name_to_update) 
 # Create form class
 class NamerForm(FlaskForm):
     name = StringField('Whats your name', validators=[DataRequired()])
@@ -121,4 +146,4 @@ def calculateCost():
                 AnnualInc=AnnualInc,
                 cROI=cROI
                 )
-
+    
